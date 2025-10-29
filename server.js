@@ -2,13 +2,13 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
-// Sert tous les fichiers statiques du dossier courant
+// Sert les fichiers statiques du dossier courant
 app.use(express.static(path.join(__dirname)));
 
-// === Routes ===
+// === ROUTES ===
 
-// Page d'accueil
-app.get("/*", (req, res) => {
+// Page d’accueil
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
@@ -27,12 +27,12 @@ app.get("/style.css", (req, res) => {
   res.sendFile(path.join(__dirname, "style.css"));
 });
 
-// Pour tout le reste (empêche les erreurs 404 sur Render)
-app.get("*", (req, res) => {
+// Route “catch-all” pour éviter les erreurs 404 sur Render
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Démarrage serveur sur le port Render
+// Démarrage serveur
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`✅ Serveur O2A Tycoon actif sur le port ${PORT}`);
