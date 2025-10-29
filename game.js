@@ -756,5 +756,9 @@ setTimeout(() => {
   }, 1000);
 }, 500);
 
-
+// 🔁 Met à jour l'affichage du stock automatiquement au lancement
+window.addEventListener("load", () => {
+  if (typeof updateStockDisplay === "function") {
+    updateStockDisplay();
+  }
 }); // <== très important : cette accolade ferme ton document.addEventListener !
