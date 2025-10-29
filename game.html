@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O2A Tycoon - Jeu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- === BANDEAU STOCK GLOBAL === -->
+<div id="stockBar">
+  <span>🍞 Pain : <span id="stockPain">0</span></span>
+  <span>🥩 Steak : <span id="stockSteak">0</span></span>
+  <span>🍟 Frites : <span id="stockFrites">0</span></span>
+  <span>🥫 Sauce : <span id="stockSauce">0</span></span>
+</div>
+
+
+  <!-- === ZONE DE JEU PRINCIPALE === -->
+  <div id="game">
+  <h2>Friterie O2A en action 🔥</h2>
+
+  <div class="game-layout">
+    <!-- Zone clients -->
+    <div id="clientZones"></div>
+
+    <!-- Zone boutons à droite -->
+    <div class="right-panel">
+      <button id="shopBtn">🧰 Ouvrir le magasin</button>
+      <button id="stockBtn">🧂 Gérer le stock</button>
+      <button id="supplierBtn">🚚 Commande Fournisseur</button>
+      <button id="journalBtn">📒 Journal</button>
+      <button id="dashboardBtn">📊 Tableau de bord</button>
+      <button id="refreshBtn">🔄 Actualiser</button>
+      <button id="toggleRobotBtn" class="hidden">🤖 Activer le robot</button>
+
+      <!-- Bouton retour -->
+      <button id="backMenu" class="back-btn">⬅️ Retour au menu</button>
+    </div>
+  </div>
+
+  <p>💶 Argent : <span id="money">0</span> €</p>
+  <p>😊 Satisfaction : <span id="satisfaction">100</span>%</p>
+</div>
+
+
+  <!-- === MAGASIN === -->
+  <div id="shop" class="hidden">
+    <h2>🛒 Magasin d'Équipement</h2>
+    <div id="items"></div>
+    <button id="closeShop">Fermer</button>
+  </div>
+
+  <!-- === GESTION DU STOCK === -->
+  <div id="stock" class="hidden">
+    <h2>🧂 Gestion du Stock</h2>
+    <div id="stockItems"></div>
+    <button id="closeStock">Fermer</button>
+  </div>
+
+  <!-- === FOURNISSEUR === -->
+  <div id="supplier" class="hidden">
+    <h2>🚚 Fournisseur O2A Supply</h2>
+    <p>Choisis les produits à commander :</p>
+    <div id="supplierItems"></div>
+    <p id="supplierStatus"></p>
+    <button id="closeSupplier">Fermer</button>
+  </div>
+
+  <!-- === JOURNAL === -->
+  <div id="journal" class="hidden">
+    <h2>📒 Journal de Gestion</h2>
+    <div id="journalEntries"></div>
+    <button id="closeJournal">Fermer</button>
+  </div>
+
+  <!-- === TABLEAU DE BORD === -->
+  <div id="dashboard" class="hidden">
+    <h2>📊 Tableau de Bord O2A Manager</h2>
+    <canvas id="profitChart" width="300" height="150"></canvas>
+    <div id="dashboardStats"></div>
+    <button id="closeDashboard">Fermer</button>
+  </div>
+
+  <!-- === ANIMATION CAMION === -->
+  <div id="truck" class="hidden">🚚💨</div>
+
+  <!-- === SONS === -->
+  <audio id="son-cuisson" src="https://cdn.pixabay.com/download/audio/2022/10/27/audio_66b4f3d79d.mp3?filename=frying-sound-126447.mp3"></audio>
+  <audio id="son-joie" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_cdfc77cc2b.mp3?filename=success-fanfare-trumpets-6185.mp3"></audio>
+  <audio id="son-rale" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9e73eb29de.mp3?filename=error-126627.mp3"></audio>
+
+  <!-- === SCRIPT === -->
+  <script src="game.js"></script>
+</body>
+</html>

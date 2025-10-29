@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O2A Friterie Tycoon 🍟 - Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="menu">
+    <h1>🍟 O2A Friterie Tycoon</h1>
+    <p>Quand t’as faim, pense O2A 😋</p>
+
+    <a href="game.html" class="menu-btn">🕹️ Nouvelle partie</a>
+    <a href="game.html" class="menu-btn">💾 Charger la partie</a>
+    <button id="btnReset" class="menu-btn">🗑️ Réinitialiser</button>
+  </div>
+
+  <script>
+    // Réinitialisation de la sauvegarde depuis le menu
+    const btnReset = document.getElementById('btnReset');
+    btnReset.onclick = () => {
+      if (confirm("Tu veux vraiment recommencer à zéro ?")) {
+        localStorage.clear();
+        alert("Partie réinitialisée !");
+      }
+    };
+  </script>
+
+</body>
+</html>

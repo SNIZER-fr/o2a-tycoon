@@ -1,0 +1,363 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #a020f0, #ff66cc);
+  color: white;
+  text-align: center;
+  padding: 50px;
+}
+
+#game {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  display: inline-block;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+button {
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  background: #fff;
+  color: #a020f0;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #ff66cc;
+  color: white;
+}
+
+#barre-patience {
+  width: 250px;
+  height: 20px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  margin: 10px auto;
+  overflow: hidden;
+}
+
+#patience {
+  height: 100%;
+  background: limegreen;
+  width: 100%;
+  transition: width 0.2s linear, background 0.2s linear;
+}
+
+.hidden {
+  display: none;
+}
+
+#shop {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  z-index: 10;
+  width: 350px;
+}
+
+#items button {
+  margin-top: 10px;
+  width: 100%;
+  font-size: 1em;
+}
+/* === PAGE DU MENU === */
+#menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 15px;
+}
+
+.menu-btn {
+  font-size: 1.2em;
+  padding: 15px 25px;
+  border-radius: 15px;
+  border: none;
+  background: white;
+  color: #a020f0;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  width: 250px;
+  transition: 0.2s;
+  display: inline-block;
+  text-align: center;
+}
+.menu-btn:hover {
+  background: #ff66cc;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* === BOUTON RETOUR === */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  padding: 8px 15px;
+  cursor: pointer;
+  color: #a020f0;
+  font-weight: bold;
+}
+.back-btn:hover {
+  background: #ff66cc;
+  color: white;
+}
+#stock {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  z-index: 10;
+  width: 350px;
+}
+#stockItems button {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 1em;
+}
+@keyframes flash {
+  0%, 100% { background-color: rgba(255,255,255,0.9); }
+  50% { background-color: #ff66cc; color: white; }
+}
+.alert {
+  animation: flash 1s ease-in-out 2;
+}
+#supplier, #journal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  z-index: 10;
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+#supplierItems button, #journalEntries div {
+  margin-top: 10px;
+  width: 100%;
+}
+#truck {
+  position: fixed;
+  bottom: 50px;
+  left: -150px;
+  font-size: 2em;
+  transition: left 3s ease-in-out;
+}
+#truck.show {
+  left: 100%;
+}
+#dashboard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  z-index: 10;
+  width: 420px;
+  color: white;
+}
+
+#dashboardStats {
+  margin-top: 20px;
+  text-align: left;
+  font-size: 1em;
+}
+
+#profitChart {
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.client-line {
+  margin: 15px auto;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 10px;
+  width: 80%;
+  max-width: 400px;
+}
+
+.barre-patience {
+  width: 100%;
+  height: 20px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.patience {
+  height: 100%;
+  background: limegreen;
+  width: 100%;
+  transition: width 0.2s linear, background 0.2s linear;
+}
+.shop-item {
+  margin-bottom: 12px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+.shop-item button {
+  display: block;
+  width: 100%;
+  margin-bottom: 4px;
+}
+.client-line {
+  margin: 15px auto;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 10px;
+  width: 80%;
+  max-width: 400px;
+}
+.barre-patience {
+  width: 100%;
+  height: 20px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.patience {
+  height: 100%;
+  background: limegreen;
+  width: 100%;
+  transition: width 0.2s linear, background 0.2s linear;
+}
+#refreshBtn {
+  background: linear-gradient(135deg, #000000, #ffffff);
+  color: #000;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+#refreshBtn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #1a1a1a, #e0e0e0);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+#refreshBtn:active {
+  transform: scale(0.97);
+  background: linear-gradient(135deg, #111111, #cccccc);
+}
+.game-layout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+#clientZones {
+  flex: 1;
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 200px;
+  align-items: stretch;
+}
+
+/* Petites améliorations visuelles */
+.right-panel button {
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #111, #fff);
+  color: #000;
+  transition: all 0.2s ease;
+}
+
+.right-panel button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+#stockBar {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  background: linear-gradient(135deg, #000000, #ffffff);
+  color: #000;
+  font-weight: bold;
+  padding: 10px 0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  flex-wrap: wrap;
+}
+
+#stockBar span {
+  font-size: 16px;
+  text-shadow: 0 0 2px #fff;
+}
+.back-btn {
+  background: linear-gradient(135deg, #000000, #ffffff);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+.back-btn {
+  display: block;
+  margin: 0 auto 15px auto;
+}
+#toggleRobotBtn {
+  background: linear-gradient(135deg, #111, #fff);
+  color: #000;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#toggleRobotBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+

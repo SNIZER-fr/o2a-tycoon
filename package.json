@@ -1,0 +1,14 @@
+{
+  "name": "o2a-tycoon",
+  "version": "1.0.0",
+  "description": "Jeu de gestion O2A Friterie Tycoon 🍟",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Alexis",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
