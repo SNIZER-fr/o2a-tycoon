@@ -1,16 +1,17 @@
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+const express = require("express");
+const path = require("path");
 const app = express();
-const PORT = 3000;
 
-// Sert les fichiers statiques (HTML, CSS, JS)
+// Sert tous les fichiers statiques du dossier courant (HTML, CSS, JS, images, etc.)
 app.use(express.static(__dirname));
 
+// Route principale -> redirige vers index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+// Render fournit son propre port (process.env.PORT)
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 O2A Friterie Tycoon lancé sur http://localhost:${PORT}`);
+  console.log(`🍟 O2A Tycoon lancé sur le port ${PORT}`);
 });
