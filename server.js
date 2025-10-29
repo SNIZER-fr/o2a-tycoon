@@ -9,6 +9,9 @@ app.use(express.static(__dirname));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
+app.get("/game.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "game.js"));
+});
 
 // Render fournit son propre port (process.env.PORT)
 const PORT = process.env.PORT || 3000;
