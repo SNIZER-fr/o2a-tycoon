@@ -27,8 +27,8 @@ app.get("/style.css", (req, res) => {
   res.sendFile(path.join(__dirname, "style.css"));
 });
 
-// Route “catch-all” pour éviter les erreurs 404 sur Render
-app.get("/*", (req, res) => {
+// Catch-all universel compatible Express 5
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
