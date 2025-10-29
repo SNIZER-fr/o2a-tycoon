@@ -756,14 +756,4 @@ setTimeout(() => {
   }, 1000);
 }, 500);
 
-// 🔁 Met à jour l'affichage du stock automatiquement au lancement
-window.addEventListener("load", () => {
-  if (typeof updateStockDisplay === "function") {
-    updateStockDisplay();
-  }
-  // Vérification auto du chargement sur Render
-window.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ Script O2A Tycoon chargé !");
-});
-
 }); // <== très important : cette accolade ferme ton document.addEventListener !
