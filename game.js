@@ -759,21 +759,21 @@ setTimeout(() => {
 let hasTakenLoan = JSON.parse(localStorage.getItem("hasTakenLoan")) || false;
 
 function checkMoneyStatus() {
-  if (money <= 0) {
-    if (!hasTakenLoan) {
-      if (confirm("💸 Vous êtes à court d’argent ! Voulez-vous contracter un prêt de 100€ ? (Une seule fois)")) {
-        money += 100;
-        hasTakenLoan = true;
-        localStorage.setItem("hasTakenLoan", true);
-        addJournal("🏦 Prêt bancaire accordé : +100€");
-        moneyDisplay.textContent = money;
-        saveGame();
-      } else {
-        gameOver();
-      }
-    } else {
-      gameOver();
+  // Si le joueur a moins de 15€
+  if (money <= 15 && !hasTakenLoan) {
+    if (confirm("💸 Votre solde est bas (moins de 15€) ! Voulez-vous contracter un prêt de 100€ ? (Une seule fois)")) {
+      money += 100;
+      hasTakenLoan = true;
+      localStorage.setItem("hasTakenLoan", true);
+      addJournal("🏦 Prêt bancaire accordé : +100€");
+      moneyDisplay.textContent = money;
+      saveGame();
     }
+  }
+
+  // Si le joueur tombe à 0 après avoir pris (ou refusé) le prêt
+  if (money <= 0) {
+    gameOver();
   }
 }
 
@@ -786,5 +786,6 @@ function gameOver() {
 
 // Vérifie toutes les 3 secondes l’état des finances
 setInterval(checkMoneyStatus, 3000);
+
 
 }); // <== très important : cette accolade ferme ton document.addEventListener !
