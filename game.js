@@ -686,7 +686,7 @@ function restoreGameState() {
     return;
   }
 
-  // On restaure l'argent, le stock, la satisfaction, etc.
+  // On restaure les données du joueur
   money = savedData.money ?? 0;
   satisfaction = savedData.satisfaction ?? 100;
   stock = savedData.stock ?? { steak: 10, pain: 10, cheddar: 10, sauce: 10 };
@@ -695,29 +695,22 @@ function restoreGameState() {
   console.log("✅ Données restaurées :", savedData);
 }
 
+// === RECHARGEMENT DES DONNÉES SAUVEGARDÉES ===
+const savedStock = JSON.parse(localStorage.getItem('stockData'));
+if (savedStock) stock = savedStock;
 
+const savedMoney = parseFloat(localStorage.getItem('money'));
+if (!isNaN(savedMoney)) money = savedMoney;
 
+const savedSatisfaction = parseFloat(localStorage.getItem('satisfaction'));
+if (!isNaN(savedSatisfaction)) satisfaction = savedSatisfaction;
 
+moneyDisplay.textContent = money;
+satisfactionDisplay.textContent = satisfaction;
 
-  // Recharge le stock
-  const savedStock = JSON.parse(localStorage.getItem('stockData'));
-  if (savedStock) stock = savedStock;
+addJournal("🧑‍🍳 Friterie O2A prête ! Reprise automatique de la dernière session.");
 
-  // Recharge les valeurs de base
-  const savedMoney = parseFloat(localStorage.getItem('money'));
-  if (!isNaN(savedMoney)) money = savedMoney;
-
-  const savedSatisfaction = parseFloat(localStorage.getItem('satisfaction'));
-  if (!isNaN(savedSatisfaction)) satisfaction = savedSatisfaction;
-
-  moneyDisplay.textContent = money;
-  satisfactionDisplay.textContent = satisfaction;
-
-  addJournal("🧑‍🍳 Friterie O2A prête ! Reprise automatique de la dernière session.");
-}
 // === BOUTON D'ACTIVATION / DÉSACTIVATION DU ROBOT ===
-
-
 const toggleBtn = document.getElementById('toggleRobotBtn');
 if (toggleBtn) {
   toggleBtn.addEventListener('click', () => {
@@ -757,5 +750,6 @@ setTimeout(() => {
     }
   }, 1000);
 }, 500);
+
 
 }); // <== très important : cette accolade ferme ton document.addEventListener !
