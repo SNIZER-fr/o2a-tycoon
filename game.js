@@ -671,28 +671,30 @@ document.getElementById('dashboardBtn').onclick = () => {
 };
 // === RESTAURATION DE PARTIE ===
 function restoreGameState() {
-  // Recharge les achats sauvegardés
-  const savedItems = JSON.parse(localStorage.getItem('items'));
-  if (Array.isArray(savedData.items)) {
-  savedData.items.forEach(name => {
-    const item = items.find(i => i.name === name);
-    if (item) {
-      item.bought = true;
-      applyItemEffect(item);
-      if (item.name === "Robot Serveur O2A") {
-        robotShouldStart = true; // on retient qu'il faut le relancer
-      }
-      if (items.find(i => i.name === "Robot Serveur O2A" && i.bought)) 
-      {
-  document.getElementById("toggleRobotBtn").classList.remove("hidden");
-      }
-        // Le robot doit toujours être racheté à chaque nouvelle session
-    const robot = items.find(i => i.name === "Robot Serveur O2A");
-    if (robot) robot.bought = false;
+  const saved = localStorage.getItem("o2aSave");
 
-    }
-  });
+  if (!saved) {
+    console.log("Aucune sauvegarde trouvée.");
+    return;
+  }
+
+  let savedData = {};
+  try {
+    savedData = JSON.parse(saved);
+  } catch (e) {
+    console.error("Erreur lecture sauvegarde :", e);
+    return;
+  }
+
+  // On restaure l'argent, le stock, la satisfaction, etc.
+  money = savedData.money ?? 0;
+  satisfaction = savedData.satisfaction ?? 100;
+  stock = savedData.stock ?? { steak: 10, pain: 10, cheddar: 10, sauce: 10 };
+  items = savedData.items ?? items;
+
+  console.log("✅ Données restaurées :", savedData);
 }
+
 
 
 
