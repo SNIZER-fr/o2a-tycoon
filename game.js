@@ -670,47 +670,52 @@ document.getElementById('dashboardBtn').onclick = () => {
   document.getElementById('dashboard').classList.remove('hidden');
 };
 // === RESTAURATION DE PARTIE ===
-function restoreGameState() {
-  const saved = localStorage.getItem("o2aSave");
+  function restoreGameState() {
+  // Recharge les achats sauvegardés
+  const savedItems = JSON.parse(localStorage.getItem('items'));
+  if (Array.isArray(savedData.items)) {
+  savedData.items.forEach(name => {
+    const item = items.find(i => i.name === name);
+    if (item) {
+      item.bought = true;
+      applyItemEffect(item);
+      if (item.name === "Robot Serveur O2A") {
+        robotShouldStart = true; // on retient qu'il faut le relancer
+      }
+      if (items.find(i => i.name === "Robot Serveur O2A" && i.bought)) 
+      {
+  document.getElementById("toggleRobotBtn").classList.remove("hidden");
+      }
+        // Le robot doit toujours être racheté à chaque nouvelle session
+    const robot = items.find(i => i.name === "Robot Serveur O2A");
+    if (robot) robot.bought = false;
 
-  if (!saved) {
-    console.log("Aucune sauvegarde trouvée.");
-    return;
-  }
-
-  let savedData = {};
-  try {
-    savedData = JSON.parse(saved);
-  } catch (e) {
-    console.error("Erreur lecture sauvegarde :", e);
-    return;
-  }
-
-  // On restaure les données du joueur
-  money = savedData.money ?? 0;
-  satisfaction = savedData.satisfaction ?? 100;
-  stock = savedData.stock ?? { steak: 10, pain: 10, cheddar: 10, sauce: 10 };
-  items = savedData.items ?? items;
-
-  console.log("✅ Données restaurées :", savedData);
+    }
+  });
 }
 
-// === RECHARGEMENT DES DONNÉES SAUVEGARDÉES ===
-const savedStock = JSON.parse(localStorage.getItem('stockData'));
-if (savedStock) stock = savedStock;
 
-const savedMoney = parseFloat(localStorage.getItem('money'));
-if (!isNaN(savedMoney)) money = savedMoney;
 
-const savedSatisfaction = parseFloat(localStorage.getItem('satisfaction'));
-if (!isNaN(savedSatisfaction)) satisfaction = savedSatisfaction;
 
-moneyDisplay.textContent = money;
-satisfactionDisplay.textContent = satisfaction;
+  // Recharge le stock
+  const savedStock = JSON.parse(localStorage.getItem('stockData'));
+  if (savedStock) stock = savedStock;
 
-addJournal("🧑‍🍳 Friterie O2A prête ! Reprise automatique de la dernière session.");
+  // Recharge les valeurs de base
+  const savedMoney = parseFloat(localStorage.getItem('money'));
+  if (!isNaN(savedMoney)) money = savedMoney;
 
+  const savedSatisfaction = parseFloat(localStorage.getItem('satisfaction'));
+  if (!isNaN(savedSatisfaction)) satisfaction = savedSatisfaction;
+
+  moneyDisplay.textContent = money;
+  satisfactionDisplay.textContent = satisfaction;
+
+  addJournal("🧑‍🍳 Friterie O2A prête ! Reprise automatique de la dernière session.");
+}
 // === BOUTON D'ACTIVATION / DÉSACTIVATION DU ROBOT ===
+
+
 const toggleBtn = document.getElementById('toggleRobotBtn');
 if (toggleBtn) {
   toggleBtn.addEventListener('click', () => {
@@ -750,6 +755,36 @@ setTimeout(() => {
     }
   }, 1000);
 }, 500);
+// === SYSTÈME DE PRÊT ET FAILLITE ===
+let hasTakenLoan = JSON.parse(localStorage.getItem("hasTakenLoan")) || false;
 
+function checkMoneyStatus() {
+  if (money <= 0) {
+    if (!hasTakenLoan) {
+      if (confirm("💸 Vous êtes à court d’argent ! Voulez-vous contracter un prêt de 100€ ? (Une seule fois)")) {
+        money += 100;
+        hasTakenLoan = true;
+        localStorage.setItem("hasTakenLoan", true);
+        addJournal("🏦 Prêt bancaire accordé : +100€");
+        moneyDisplay.textContent = money;
+        saveGame();
+      } else {
+        gameOver();
+      }
+    } else {
+      gameOver();
+    }
+  }
+}
+
+function gameOver() {
+  alert("💀 GAME OVER : La friterie O2A a fait faillite !");
+  addJournal("💀 Faillite ! La friterie O2A ferme ses portes...");
+  localStorage.clear();
+  window.location.href = "index.html";
+}
+
+// Vérifie toutes les 3 secondes l’état des finances
+setInterval(checkMoneyStatus, 3000);
 
 }); // <== très important : cette accolade ferme ton document.addEventListener !
