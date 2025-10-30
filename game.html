@@ -92,12 +92,7 @@
   <audio id="son-rale" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9e73eb29de.mp3?filename=error-126627.mp3"></audio>
 
   <!-- === SCRIPT === -->
-  <script>
-    // 🧠 Anti-cache : ajoute la date actuelle à l’URL du script pour forcer le navigateur à recharger
-    const script = document.createElement("script");
-    script.src = "game.js?v=" + new Date().getTime(); 
-    document.body.appendChild(script); // 👈 ICI : on le met à la fin du body
-  </script>
+  <script src="game.js"></script>
 
 </body>
 </html>
