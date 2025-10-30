@@ -755,36 +755,5 @@ setTimeout(() => {
     }
   }, 1000);
 }, 500);
-// === SYSTÈME DE PRÊT ET FAILLITE ===
-let hasTakenLoan = JSON.parse(localStorage.getItem("hasTakenLoan")) || false;
-
-function checkMoneyStatus() {
-  if (money <= 0) {
-    if (!hasTakenLoan) {
-      if (confirm("💸 Vous êtes à court d’argent ! Voulez-vous contracter un prêt de 100€ ? (Une seule fois)")) {
-        money += 100;
-        hasTakenLoan = true;
-        localStorage.setItem("hasTakenLoan", true);
-        addJournal("🏦 Prêt bancaire accordé : +100€");
-        moneyDisplay.textContent = money;
-        saveGame();
-      } else {
-        gameOver();
-      }
-    } else {
-      gameOver();
-    }
-  }
-}
-
-function gameOver() {
-  alert("💀 GAME OVER : La friterie O2A a fait faillite !");
-  addJournal("💀 Faillite ! La friterie O2A ferme ses portes...");
-  localStorage.clear();
-  window.location.href = "index.html";
-}
-
-// Vérifie toutes les 3 secondes l’état des finances
-setInterval(checkMoneyStatus, 3000);
 
 }); // <== très important : cette accolade ferme ton document.addEventListener !
