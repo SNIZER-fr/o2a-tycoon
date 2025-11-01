@@ -92,7 +92,23 @@
   <audio id="son-rale" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9e73eb29de.mp3?filename=error-126627.mp3"></audio>
 
   <!-- === SCRIPT === -->
-  <script src="game.js"></script>
+  <!-- === SCRIPT PRINCIPAL === -->
+<script>
+  // Anti-cache + chargement après la page complète
+  window.addEventListener("load", () => {
+    const script = document.createElement("script");
+    script.src = "game.js?v=" + new Date().getTime();
+    script.onload = () => {
+      console.log("✅ Script O2A Tycoon chargé !");
+      if (typeof newClient === "function") {
+        console.log("🚀 Lancement automatique des clients...");
+        setTimeout(newClient, 800); // petit délai pour laisser le DOM prêt
+      }
+    };
+    document.body.appendChild(script);
+  });
+</script>
+
 
 </body>
 </html>
