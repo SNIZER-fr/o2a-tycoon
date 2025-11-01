@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>O2A Tycoon - Jeu</title>
-  <link rel="stylesheet" href="style.css?v=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -92,23 +92,7 @@
   <audio id="son-rale" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9e73eb29de.mp3?filename=error-126627.mp3"></audio>
 
   <!-- === SCRIPT === -->
-  <!-- === SCRIPT PRINCIPAL === -->
-<script>
-  // Anti-cache + chargement après la page complète
-  window.addEventListener("load", () => {
-    const script = document.createElement("script");
-    script.src = "game.js?v=" + new Date().getTime();
-    script.onload = () => {
-      console.log("✅ Script O2A Tycoon chargé !");
-      if (typeof newClient === "function") {
-        console.log("🚀 Lancement automatique des clients...");
-        setTimeout(newClient, 800); // petit délai pour laisser le DOM prêt
-      }
-    };
-    document.body.appendChild(script);
-  });
-</script>
-
+  <script src="game.js"></script>
 
 </body>
 </html>
