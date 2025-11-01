@@ -669,6 +669,7 @@ document.getElementById('dashboardBtn').onclick = () => {
   renderDashboard();
   document.getElementById('dashboard').classList.remove('hidden');
 };
+
 // === RESTAURATION DE PARTIE ===
 function restoreGameState() {
   // Recharge les données sauvegardées (argent, satisfaction, items, etc.)
@@ -715,7 +716,8 @@ function restoreGameState() {
   satisfactionDisplay.textContent = satisfaction;
 
   addJournal("🧑‍🍳 Friterie O2A prête ! Reprise automatique de la dernière session.");
-}
+
+
 // === BOUTON D'ACTIVATION / DÉSACTIVATION DU ROBOT ===
 
 
