@@ -670,29 +670,32 @@ document.getElementById('dashboardBtn').onclick = () => {
   document.getElementById('dashboard').classList.remove('hidden');
 };
 // === RESTAURATION DE PARTIE ===
-  function restoreGameState() {
-  // Recharge les achats sauvegardés
-  const savedItems = JSON.parse(localStorage.getItem('items'));
-  if (Array.isArray(savedData.items)) {
-  savedData.items.forEach(name => {
-    const item = items.find(i => i.name === name);
-    if (item) {
-      item.bought = true;
-      applyItemEffect(item);
-      if (item.name === "Robot Serveur O2A") {
-        robotShouldStart = true; // on retient qu'il faut le relancer
-      }
-      if (items.find(i => i.name === "Robot Serveur O2A" && i.bought)) 
-      {
-  document.getElementById("toggleRobotBtn").classList.remove("hidden");
-      }
-        // Le robot doit toujours être racheté à chaque nouvelle session
-    const robot = items.find(i => i.name === "Robot Serveur O2A");
-    if (robot) robot.bought = false;
+function restoreGameState() {
+  // Recharge les données sauvegardées (argent, satisfaction, items, etc.)
+  const savedData = JSON.parse(localStorage.getItem('saveData')) || {};
+  const savedItems = JSON.parse(localStorage.getItem('items')) || [];
 
-    }
-  });
+  // Restaure les achats si disponibles
+  if (Array.isArray(savedItems)) {
+    savedItems.forEach(name => {
+      const item = items.find(i => i.name === name);
+      if (item) {
+        item.bought = true;
+        applyItemEffect(item);
+        if (item.name === "Robot Serveur O2A") {
+          robotShouldStart = true; // relance du robot plus tard
+        }
+      }
+    });
+  }
+
+  // Le robot doit toujours être racheté à chaque nouvelle session
+  const robot = items.find(i => i.name === "Robot Serveur O2A");
+  if (robot) robot.bought = false;
+
+  console.log("✅ Restauration du jeu terminée !");
 }
+
 
 
 
