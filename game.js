@@ -739,22 +739,21 @@ if (toggleBtn) {
 }
 
 // === DÉMARRAGE ===
-window.onload = () => {
-  restoreGameState();
-  autoRestock();
+restoreGameState();
+autoRestock();
 
-  setTimeout(() => {
-    newClient();
+setTimeout(() => {
+  newClient();
 
-    robotCheckInterval = setInterval(() => {
-      if (robotShouldStart && document.getElementById('serve1')) {
-        enableRobotServer();
-        addJournal("🤖 Robot Serveur O2A réactivé automatiquement après reprise !");
-        clearInterval(robotCheckInterval);
-        robotShouldStart = false;
-      }
-    }, 1000);
-  }, 500);
-};
+  // Vérification automatique toutes les secondes tant que le robot n'est pas relancé
+  robotCheckInterval = setInterval(() => {
+    if (robotShouldStart && document.getElementById('serve1')) {
+      enableRobotServer();
+      addJournal("🤖 Robot Serveur O2A réactivé automatiquement après reprise !");
+      clearInterval(robotCheckInterval);
+      robotShouldStart = false;
+    }
+  }, 1000);
+}, 500);
 
-
+}); // <== très important : cette accolade ferme ton document.addEventListener !
