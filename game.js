@@ -760,5 +760,16 @@ setTimeout(() => {
     }
   }, 1000);
 }, 500);
+// === 🔁 Sécurité : relance automatique s'il n'y a plus de clients visibles ===
+setInterval(() => {
+  const clientLines = document.querySelectorAll(".client-line");
+  const hasActive = Array.from(clientLines).some(line =>
+    line.querySelector("button")?.textContent.includes("Servir")
+  );
+  if (!hasActive && typeof newClient === "function") {
+    console.log("⚠️ Aucun client détecté, relance automatique...");
+    newClient();
+  }
+}, 6000);
 
 }); // <== très important : cette accolade ferme ton document.addEventListener !
